@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Kelas MI-1MIA</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- AOS (Animate on Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <!-- Font Awesome (icons) -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #071021; /* deep navy */
+        --card: #0b1220; /* card background */
+        --muted: #9aa6bf;
+        --neon-1: #22d3ee; /* cyan */
+        --neon-2: #7c3aed; /* purple */
+        --glass: rgba(255, 255, 255, 0.04);
+        --accent-gradient: linear-gradient(
+          90deg,
+          rgba(34, 211, 238, 0.12),
+          rgba(124, 58, 237, 0.12)
+        );
+        --glass-border: rgba(255, 255, 255, 0.06);
+        --radius: 14px;
+      }
+
+      html,
+      body {
+        height: 100%;
+        background: radial-gradient(
+            1200px 600px at 10% 10%,
+            rgba(34, 211, 238, 0.06),
+            transparent 8%
+          ),
+          radial-gradient(
+            900px 500px at 90% 90%,
+            rgba(124, 58, 237, 0.05),
+            transparent 8%
+          ),
+          var(--bg);
+        color: #e6eef8;
+        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        scroll-behavior: smooth;
+      }
+
+      /* NAVBAR */
+      .navbar {
+        background: rgba(8, 12, 20, 0.4);
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      }
+      .navbar-brand {
+        font-weight: 700;
+        letter-spacing: 0.6px;
+        color: var(--neon-1) !important;
+      }
+      .nav-link {
+        color: var(--muted) !important;
+        transition: color 0.18s ease;
+      }
+      .nav-link:hover {
+        color: white !important;
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 72vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        padding-top: 70px;
+      }
+      .hero .panel {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        padding: 36px;
+        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+      }
+      .hero h1 {
+        font-size: clamp(28px, 3.6vw, 48px);
+        line-height: 1.04;
+        margin-bottom: 12px;
+        color: #fff;
+        text-shadow: 0 6px 30px rgba(124, 58, 237, 0.12);
+      }
+      .hero p.lead {
+        color: var(--muted);
+        font-size: 1.05rem;
+        margin-bottom: 18px;
+      }
+
+      /* neon accent */
+      .neon-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(
+          90deg,
+          rgba(34, 211, 238, 0.06),
+          rgba(124, 58, 237, 0.06)
+        );
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        color: var(--neon-1);
+        box-shadow: 0 6px 30px rgba(124, 58, 237, 0.04),
+          0 0 18px rgba(34, 211, 238, 0.03);
+        font-weight: 600;
+      }
+
+      /* hero graphics (parallax layers) */
+      .parallax-layer {
+        position: absolute;
+        pointer-events: none;
+        filter: blur(8px);
+        mix-blend-mode: screen;
+        opacity: 0.85;
+      }
+
+      /* cards grid */
+      .cards-grid {
+        margin-top: 28px;
+      }
+      .card.glass {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 18px;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+        box-shadow: 0 8px 24px rgba(3, 6, 20, 0.6);
+      }
+      .card.glass:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(2, 6, 23, 0.75);
+      }
+
+      .role {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--neon-1), var(--neon-2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #021021;
+        font-weight: 700;
+        box-shadow: 0 6px 18px rgba(124, 58, 237, 0.12);
+      }
+
+      /* tables */
+      .table-custom thead th {
+        background: linear-gradient(
+          90deg,
+          rgba(34, 211, 238, 0.08),
+          rgba(124, 58, 237, 0.08)
+        );
+        color: #e9f7fb;
+        border-bottom: none;
+      }
+      .table-custom tbody td {
+        color: var(--muted);
+        vertical-align: middle;
+      }
+      .table-responsive {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      /* footer */
+      footer {
+        margin-top: 48px;
+        padding: 28px 0;
+        text-align: center;
+        color: var(--muted);
+        border-top: 1px solid rgba(255, 255, 255, 0.02);
+      }
+
+      /* back to top */
+      #topBtn {
+        position: fixed;
+        right: 18px;
+        bottom: 22px;
+        z-index: 9999;
+        background: linear-gradient(90deg, var(--neon-1), var(--neon-2));
+        color: #021021;
+        border: none;
+        padding: 12px 14px;
+        border-radius: 999px;
+        box-shadow: 0 8px 30px rgba(124, 58, 237, 0.12);
+        display: none;
+      }
+
+      /* responsive tweaks */
+      @media (max-width: 768px) {
+        .hero {
+          padding: 110px 18px 50px;
+          min-height: 60vh;
+        }
+        .avatar {
+          width: 48px;
+          height: 48px;
+        }
+      }
+
+      /* subtle focus for accessibility */
+      a:focus,
+      button:focus {
+        outline: 3px solid rgba(34, 211, 238, 0.12);
+        outline-offset: 3px;
+      }
+
+      @media (max-width: 768px) {
+        #pelajaran .col-lg-4 {
+          margin-top: 24px;
+        }
+        #contact h5 {
+          font-size: 1.1rem;
+        }
+        #contact p {
+          font-size: 0.95rem;
+        }
+      }
+
+      /* ===== FIX MOBILE tidak ubah tampilan ===== */
+      .parallax-layer {
+        z-index: 0 !important;
+      }
+
+      section,
+      footer,
+      main,
+      header {
+        position: relative;
+        z-index: 2;
+      }
+
+      #pelajaran .col-lg-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-top: 24px;
+      }
+
+      #contact {
+        position: relative;
+        z-index: 3;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      /* ubah */
+      .naikin-keatas {
+        margin-top: -20px;
+      }
+      .turun-kebawah {
+        margin-top: 10px;
+      }
+      .kebawah {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#"
+          >MI-1MIA<span style="opacity: 0.6"></span
+        ></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#perangkat">Perangkat</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#piket">Piket</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#pelajaran">Pelajaran</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO with Parallax Layers -->
+    <header class="hero">
+      <!-- decorative parallax blobs -->
+      <div
+        class="parallax-layer"
+        data-rellax-speed="-2"
+        style="
+          right: -10%;
+          top: -8%;
+          width: 520px;
+          height: 520px;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle at 30% 30%,
+            rgba(124, 58, 237, 0.45),
+            transparent 35%
+          );
+          filter: blur(60px);
+        "
+      ></div>
+      <div
+        class="parallax-layer"
+        data-rellax-speed="-1"
+        style="
+          left: -8%;
+          bottom: -6%;
+          width: 420px;
+          height: 420px;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle at 20% 20%,
+            rgba(34, 211, 238, 0.42),
+            transparent 30%
+          );
+          filter: blur(48px);
+        "
+      ></div>
+
+      <div class="container" id="about">
+        <div class="row align-items-center">
+          <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+            <div class="panel">
+              <span class="neon-pill mb-3"
+                ><i class="fa fa-graduation-cap"></i> Kelas MI-1MIA</span
+              >
+              <h1>ABOUT</h1>
+              <p class="lead">
+                Kami adalah Kelas MI-1MIA, Kelas yang mempelajari teknologi yang
+                berfokus pada inovasi dan kolaborasi. Bersama kami, belajar
+                bukan hanya tentang teori tapi juga tentang menciptakan masa
+                depan digital. Dengan semangat solid dan tekad maju, kami
+                membangun budaya belajar yang kreatif, adaptif, dan
+                berintegritas.
+              </p>
+
+              <div class="d-flex gap-2 mt-3">
+                <a
+                  href="#perangkat"
+                  class="btn btn-lg"
+                  style="
+                    background: linear-gradient(
+                      90deg,
+                      var(--neon-1),
+                      var(--neon-2)
+                    );
+                    color: #031022;
+                    font-weight: 600;
+                    box-shadow: 0 10px 40px rgba(124, 58, 237, 0.12);
+                  "
+                >
+                  Lihat Perangkat <i class="fa fa-arrow-right ms-2"></i>
+                </a>
+                <a
+                  href="#pelajaran"
+                  class="btn btn-outline-light btn-lg"
+                  style="border: 1px solid rgba(255, 255, 255, 0.04)"
+                  >Jadwal Pelajaran</a
+                >
+              </div>
+
+              <div class="cards-grid row mt-4 gx-3">
+                <div
+                  class="col-6 col-md-6 col-lg-4"
+                  data-aos="fade-up"
+                  data-aos-delay="160"
+                >
+                  <div class="card glass p-2 h-100" data-tilt data-tilt-max="8">
+                    <div class="role">
+                      <div class="avatar">KT</div>
+                      <div>
+                        <div style="font-weight: 600; color: white">
+                          Ketua Kelas
+                        </div>
+                        <div style="color: var(--muted); font-size: 0.92rem">
+                          AULIA SEPTIANI
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-6 col-md-6 col-lg-4"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
+                  <div class="card glass p-2 h-100" data-tilt data-tilt-max="8">
+                    <div class="role">
+                      <div class="avatar">WK</div>
+                      <div>
+                        <div style="font-weight: 600; color: white">
+                          Wakil Ketua
+                        </div>
+                        <div style="color: var(--muted); font-size: 0.92rem">
+                          ASKA AL GHIFARI
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-12 col-md-12 col-lg-4 turun-kebawah"
+                  data-aos="fade-up"
+                  data-aos-delay="240"
+                >
+                  <div class="card glass p-2 h-100" data-tilt data-tilt-max="8">
+                    <div class="role">
+                      <div class="avatar">DP</div>
+                      <div>
+                        <div style="font-weight: 600; color: white">
+                          Dosen Pembimbing
+                        </div>
+                        <div style="color: var(--muted); font-size: 0.92rem">
+                          ALEM PAMELI
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero visual / credit panel -->
+          <div class="col-lg-6 kebawah" data-aos="fade-left" data-aos-delay="120">
+            <div class="card" style="background: transparent; border: none">
+              <div class="card-body p-0">
+                <!-- Mock device / board -->
+                <div
+                  style="
+                    border-radius: 18px;
+                    overflow: hidden;
+                    border: 1px solid rgba(255, 255, 255, 0.03);
+                    background: linear-gradient(
+                      180deg,
+                      rgba(255, 255, 255, 0.02),
+                      rgba(255, 255, 255, 0.01)
+                    );
+                    box-shadow: 0 20px 60px rgba(2, 6, 23, 0.6);
+                  "
+                >
+                  <div style="padding: 28px">
+                    <div style="display: flex; gap: 12px; align-items: center">
+                      <div
+                        style="
+                          width: 60px;
+                          height: 60px;
+                          border-radius: 12px;
+                          background: linear-gradient(
+                            90deg,
+                            var(--neon-1),
+                            var(--neon-2)
+                          );
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          color: #021021;
+                          font-weight: 700;
+                        "
+                      >
+                        MIA
+                      </div>
+                      <div>
+                        <div
+                          style="
+                            font-weight: 700;
+                            font-size: 1.05rem;
+                            color: white;
+                          "
+                        >
+                          Dashboard Ringkas
+                        </div>
+                        <div
+                          style="color: var(--muted); font-size: 0.92rem"
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div class="row mt-4 g-3">
+                      <div class="col-6">
+                        <div
+                          style="
+                            padding: 14px;
+                            border-radius: 10px;
+                            background: linear-gradient(
+                              180deg,
+                              rgba(255, 255, 255, 0.01),
+                              rgba(255, 255, 255, 0)
+                            );
+                            border: 1px solid rgba(255, 255, 255, 0.02);
+                          "
+                        >
+                          <div
+                            style="
+                              font-weight: 700;
+                              font-size: 1.25rem;
+                              color: #e9f7fb;
+                            "
+                          >
+                            23
+                          </div>
+                          <div style="color: var(--muted)">Anggota</div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div
+                          style="
+                            padding: 14px;
+                            border-radius: 10px;
+                            background: linear-gradient(
+                              180deg,
+                              rgba(255, 255, 255, 0.01),
+                              rgba(255, 255, 255, 0)
+                            );
+                            border: 1px solid rgba(255, 255, 255, 0.02);
+                          "
+                        >
+                          <div
+                            style="
+                              font-weight: 700;
+                              font-size: 1.25rem;
+                              color: #e9f7fb;
+                            "
+                          >
+                            4
+                          </div>
+                          <div style="color: var(--muted)">Perangkat</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="mt-3"
+                      style="
+                        border-radius: 10px;
+                        padding: 10px;
+                        border: 1px dashed rgba(255, 255, 255, 0.03);
+                      "
+                    >
+                      <div style="font-size: 0.92rem; color: var(--muted)">
+                        Catatan singkat
+                      </div>
+                      <div style="color: #e9f7fb; font-weight: 600">
+                        “Koding bukan sekadar mengetik, tapi menciptakan masa
+                        depan.” Kelas kami akan selalu belajar, berinovasi, dan
+                        berani mencoba hal baru
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /row -->
+      </div>
+    </header>
+
+    <!-- ABOUT -->
+    <main>
+      <section id="about" class="py-5" style="padding-top: 48px">
+        <div class="container" data-aos="fade-up">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <h3 style="color: #fff; font-weight: 700">About Kelas MI-1MIA</h3>
+              <p style="color: var(--muted)">
+                Kelas MI-1MIA merupakan kumpulan mahasiswa MANAJEMEN INFORMATIKA
+                angkatan 2025. Fokus kami pada praktik, project-based learning.
+                Dosen pembimbing aktif memfasilitasi bimbingan akademik dan
+                kegiatan praktikum.
+              </p>
+              <ul style="color: var(--muted)">
+                <li>Project: Web & Mobile</li>
+                <li>Lab: Jaringan dan Basis Data</li>
+                <li>Lab : Desain Grafis</li>
+              </ul>
+            </div>
+            <div class="col-md-6" data-aos="fade-left">
+              <div class="card glass p-3">
+                <div style="display: flex; gap: 12px; align-items: center">
+                  <div
+                    class="avatar"
+                    style="width: 64px; height: 64px; border-radius: 12px"
+                  >
+                    DP
+                  </div>
+                  <div>
+                    <div style="font-weight: 700; color: white">
+                      Dosen Pembimbing
+                    </div>
+                    <div style="color: var(--muted)">
+                      ALEM PAMELI, S.S.T, M.M.
+                    </div>
+                  </div>
+                </div>
+                <p class="mt-3" style="color: var(--muted)">
+                  Dosen pembimbing fokus pada topik Desain Grafis. Pembelajaran
+                  Teori dan Praktik hari Kamis dan Jum'at.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PERANGKAT -->
+      <section id="perangkat" class="py-5" style="padding-top: 20px">
+        <div class="container" data-aos="fade-up">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 style="font-weight: 700">Perangkat Kelas</h4>
+            <div style="color: var(--muted); font-size: 0.95rem"></div>
+          </div>
+
+          <div class="row g-4">
+            <!-- Card 1 -->
+            <div
+              class="col-sm-6 col-md-4 col-lg-2"
+              data-aos="zoom-in"
+              data-aos-delay="60"
+            >
+              <div class="card glass p-3" data-tilt data-tilt-max="10">
+                <div style="display: flex; gap: 10px; align-items: center">
+                  <div class="avatar">KT</div>
+                  <div>
+                    <div style="font-weight: 700; color: white">Ketua</div>
+                    <div style="color: var(--muted); font-size: 0.9rem">
+                      AULIA SEPTIANI
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div
+              class="col-sm-6 col-md-4 col-lg-2"
+              data-aos="zoom-in"
+              data-aos-delay="120"
+            >
+              <div class="card glass p-3" data-tilt data-tilt-max="10">
+                <div style="display: flex; gap: 10px; align-items: center">
+                  <div class="avatar">WK</div>
+                  <div>
+                    <div style="font-weight: 700; color: white">Wakil</div>
+                    <div style="color: var(--muted); font-size: 0.9rem">
+                      MUHAMMAD ASKA A.L
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div
+              class="col-sm-6 col-md-4 col-lg-2"
+              data-aos="zoom-in"
+              data-aos-delay="180"
+            >
+              <div class="card glass p-3" data-tilt data-tilt-max="10">
+                <div style="display: flex; gap: 10px; align-items: center">
+                  <div class="avatar">SK</div>
+                  <div>
+                    <div style="font-weight: 700; color: white">Sekretaris</div>
+                    <div style="color: var(--muted); font-size: 0.9rem">
+                      RISKA AULIA
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div
+              class="col-sm-6 col-md-4 col-lg-2"
+              data-aos="zoom-in"
+              data-aos-delay="240"
+            >
+              <div class="card glass p-3" data-tilt data-tilt-max="10">
+                <div style="display: flex; gap: 10px; align-items: center">
+                  <div class="avatar">BD</div>
+                  <div>
+                    <div style="font-weight: 700; color: white">Bendahara</div>
+                    <div style="color: var(--muted); font-size: 0.9rem">
+                      PUTRI FEBRIYANI
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div
+              class="col-sm-6 col-md-4 col-lg-2"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+            >
+              <div class="card glass p-3" data-tilt data-tilt-max="10">
+                <div style="display: flex; gap: 10px; align-items: center">
+                  <div class="avatar">DP</div>
+                  <div>
+                    <div style="font-weight: 700; color: white">
+                      Dosen Pembimbing
+                    </div>
+                    <div style="color: var(--muted); font-size: 0.9rem">
+                      ALEM PAMELI
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PIKET -->
+      <section id="piket" class="py-5" style="padding-top: 10px">
+        <div class="container" data-aos="fade-up">
+          <h4 style="font-weight: 700; margin-bottom: 18px">
+            Jadwal Piket (Senin–Jumat)
+          </h4>
+          <div class="table-responsive">
+            <table class="table table-dark table-striped">
+              <thead>
+                <tr>
+                  <th>Hari</th>
+                  <th>Petugas</th>
+                  <th>Catatan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Senin</td>
+                  <td style="color: BLACK">
+                    ADIT, ANNISA, AULIA SEPTIANI, DERJA, DEVITA
+                  </td>
+                  <td style="color: var(--muted)">Bersihkan Kelas</td>
+                </tr>
+                <tr>
+                  <td>Selasa</td>
+                  <td style="color: black">
+                    DIARA OKASA, FIRMAN, HANISA AFRILIA, ILZAM, MUTHIA
+                  </td>
+                  <td style="color: var(--muted)">Bersihkan Kelas</td>
+                </tr>
+                <tr>
+                  <td>Rabu</td>
+                  <td style="color: black">LUCKY, ASKA, NABILA, NAILA, OKTA</td>
+                  <td style="color: var(--muted)">Bersihkan Kelas</td>
+                </tr>
+                <tr>
+                  <td>Kamis</td>
+                  <td style="color: black">
+                    RAFLY ROMALINO, PUTRI, RAFFI AHMAD, RISKA
+                  </td>
+                  <td style="color: var(--muted)">Bersihkan Kelas</td>
+                </tr>
+                <tr>
+                  <td>Jumat</td>
+                  <td style="color: black">
+                    SAFFA, SULTAN GAZA, SYAQILLA, SYESYAH
+                  </td>
+                  <td style="color: var(--muted)">Bersihkan Kelas</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PELAJARAN -->
+      <section id="pelajaran" class="py-5">
+        <div class="container" data-aos="fade-up">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 style="font-weight: 700">Jadwal Pelajaran</h4>
+            <div style="color: var(--muted); font-size: 0.95rem">
+              Senin–Jumat
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <div class="table-responsive">
+                <table class="table table-custom">
+                  <thead>
+                    <tr>
+                      <th>Hari</th>
+                      <th>Jam</th>
+                      <th>Mata Pelajaran</th>
+                      <th>Dosen</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="table-active">
+                      <td>Senin</td>
+                      <td>07:00 - 10:50</td>
+                      <td>Praktikum Sistem Komputer</td>
+                      <td>Surahmat</td>
+                    </tr>
+                    <tr class="table-active">
+                      <td>Senin</td>
+                      <td>10:00 - 12:30</td>
+                      <td>Teori Algoritma dan Pemograman</td>
+                      <td>Herlinda Kusmiati</td>
+                    </tr>
+                    <tr class="table table-success">
+                      <td>Selasa</td>
+                      <td>07:00 - 08:40</td>
+                      <td>Pancasila</td>
+                      <td>Deri Darfin</td>
+                    </tr>
+                    <tr class="table table-success">
+                      <td>Selasa</td>
+                      <td>08:40 - 10:50</td>
+                      <td>Matematika Dasar</td>
+                      <td>Marti Utari</td>
+                    </tr>
+                    <tr class="table table-success">
+                      <td>Selasa</td>
+                      <td>10:50 - 12:30</td>
+                      <td>Bahasa Inggris</td>
+                      <td>Rahmadila Eka Putri</td>
+                    </tr>
+                    <tr class="table-active">
+                      <td>Rabu</td>
+                      <td>07:00 - 08:40</td>
+                      <td>Sistem Operasi</td>
+                      <td>Robinson</td>
+                    </tr>
+                    <tr class="table-active">
+                      <td>Rabu</td>
+                      <td>08:40 - 10:50</td>
+                      <td>Pengantar Ekonomi</td>
+                      <td>Muhammad Noval</td>
+                    </tr>
+                    <tr class="table-active">
+                      <td>Rabu</td>
+                      <td>10:00 - 12:30</td>
+                      <td>Teori Desain Grafis</td>
+                      <td>Alem Pameli</td>
+                    </tr>
+                    <tr class="table table-success">
+                      <td>Kamis</td>
+                      <td>07:00 - 09:30</td>
+                      <td>Praktikum Aplikasi Bisnis</td>
+                      <td>Zulkarnain</td>
+                    </tr>
+                    <tr class="table table-success">
+                      <td>Kamis</td>
+                      <td>10:00 - 12:30</td>
+                      <td>Praktikum Algoritma dan Pemograman</td>
+                      <td>Herlinda Kusmiati</td>
+                    </tr>
+                    <tr class="table-active">
+                      <td>Jumat</td>
+                      <td>07:00 - 09:30</td>
+                      <td>Praktikum Desain Grafis</td>
+                      <td>Alem Pameli</td>
+                    </tr>
+                    <tr class="table-active">
+                      <td>Jumat</td>
+                      <td>10:00 - 11:40</td>
+                      <td>Praktikum Aplikasi Bisnis</td>
+                      <td>Zulkarnain</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="naikin-keatas">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-md-start">
+            <small>© 2025 Kelas MI-1MIA • Dibuat untuk Kepentingan kelas</small>
+          </div>
+          <div class="col-md-6 text-md-end" style="color: var(--muted)">
+            <small>Made with <i style="color: var(--neon-2)"></i> — ASKA</small>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button id="topBtn" aria-label="Kembali ke atas">
+      <i class="fa fa-chevron-up"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- Rellax (parallax) -->
+    <script src="https://unpkg.com/rellax@1.12.1/rellax.min.js"></script>
+
+    <!-- VanillaTilt (card tilt) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+
+    <script>
+      // Initialize AOS
+      AOS.init({ duration: 850, easing: "ease-out-cubic", once: true });
+
+      // Initialize Rellax for parallax layers (simple)
+      try {
+        new Rellax(".parallax-layer", {
+          center: false,
+          wrapper: null,
+          relativeToWrapper: false,
+        });
+      } catch (e) {
+        console.warn(e);
+      }
+
+      // Init VanillaTilt for elements with data-tilt
+      VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+        max: 10,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.12,
+        scale: 1.02,
+      });
+
+      // Navbar shadow on scroll
+      const nav = document.querySelector(".navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 20) nav.style.backdropFilter = "blur(8px)";
+        else nav.style.backdropFilter = "blur(6px)";
+      });
+
+      // Back to top button
+      const topBtn = document.getElementById("topBtn");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) topBtn.style.display = "block";
+        else topBtn.style.display = "none";
+      });
+      topBtn.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      );
+
+      // Smooth anchor offset (account for fixed navbar)
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const target = document.querySelector(this.getAttribute("href"));
+          if (!target) return;
+          e.preventDefault();
+          const offset = 72; // navbar height
+          const topPos =
+            target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top: topPos, behavior: "smooth" });
+        });
+      });
+
+      // Small accessibility: focus visible for keyboard navigation on buttons/links
+      document.addEventListener("keyup", (e) => {
+        if (e.key === "Tab") document.body.classList.add("show-focus");
+      });
+    </script>
+  </body>
+</html>
