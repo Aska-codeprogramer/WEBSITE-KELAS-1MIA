@@ -268,24 +268,6 @@
 
       /* responsive tweaks */
       @media (max-width: 768px) {
-        .hero {
-          padding: 110px 18px 50px;
-          min-height: 60vh;
-        }
-        .avatar {
-          width: 48px;
-          height: 48px;
-        }
-      }
-
-      /* subtle focus for accessibility */
-      a:focus,
-      button:focus {
-        outline: 3px solid rgba(34, 211, 238, 0.12);
-        outline-offset: 3px;
-      }
-
-      @media (max-width: 768px) {
         #pelajaran .col-lg-4 {
           margin-top: 24px;
         }
@@ -332,6 +314,62 @@
       .kebawah {
         margin-top: 20px;
       }
+      
+      /* GALERI SCROLLING */
+      .gallery-wrapper {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.02);
+        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.5);
+      }
+
+      .gallery-track {
+        display: flex;
+        gap: 18px;
+        animation: scrollGallery 40s linear infinite;
+      }
+
+      .gallery-track img {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-track img:hover {
+        transform: scale(1.05);
+      }
+
+      @keyframes scrollGallery {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+
+      .hero {
+          padding: 110px 18px 50px;
+          min-height: 60vh;
+        }
+        .avatar {
+          width: 48px;
+          height: 48px;
+        }
+
+      /* subtle focus for accessibility */
+      a:focus,
+      button:focus {
+        outline: 3px solid rgba(34, 211, 238, 0.12);
+        outline-offset: 3px;
+      }
+
     </style>
   </head>
   <body>
@@ -1075,6 +1113,7 @@
     </script>
   </body>
 </html>
+
 
 
 
