@@ -279,7 +279,7 @@
         }
       }
 
-      /* ===== FIX MOBILE tidak ubah tampilan ===== */
+      /* ===== MOBILE tidak ubah tampilan ===== */
       .parallax-layer {
         z-index: 0 !important;
       }
@@ -352,6 +352,25 @@
           transform: translateX(-50%);
         }
       }
+
+      .gallery-track {
+        animation: scrollGalleryMobile 35s linear infinite;
+        gap: 10px;
+      }
+
+      .gallery-track img {
+        width: 200px;
+        height: 130px;
+      }
+
+  @keyframes scrollGalleryMobile {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 
 
       .hero {
@@ -1113,6 +1132,7 @@
     </script>
   </body>
 </html>
+
 
 
 
